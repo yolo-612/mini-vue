@@ -93,4 +93,4 @@ App.render(App.setup());
 
 // 暂存在缺点：
 // 1. dom是写死的，无法跨平台;
-// 2. 目前UI这套 是整体切换【document.querySelector("#app").textContent = ``; 再append】; 花销大
+// 2. 目前UI这套 是整体切换【document.querySelector("#app").textContent = ``; 再append】; 添加方式古板，花销大
