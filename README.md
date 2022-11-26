@@ -11,3 +11,11 @@ source code train
 3. npm i @vue/reactivity
 4. 引入 npm 理解 reactivity 的收集依赖触发依赖过程
 5. 使用 core 实现 reactivity 的响应式
+
+## reactive[响应式] 针对对象
+
+问题：由于是对象，是有多个属性 如何在对象其中一个属性.age 的时候 就知道
+答：使用 proxy 解决 get 的时候就知道访问的 key
+
+问题 2：get 收集依赖使用的 Dep 实例应该和 set 触发依赖 使用的实例是同一个实例 才对 ===》 如何取存储 Dep 实例
+即表现为 age ===》 Dep(A) | name ===> Dep(B) ===> 体现为有两层
