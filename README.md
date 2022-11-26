@@ -24,3 +24,10 @@ source code train
 
 视图上体现响应式【分别以组件的形式以及 webapi 的方法体现】
 其中：vue 的 template 会被渲染成 render 函数
+
+## mini-vue-4
+
+vue3 实际使用中的是：
+初始化：createApp(App).mount("#app")
+将 effectWatch 提取到 render 的外层
+const element = rootComponent.render(setupResult)===> 只关心这个组件的视图

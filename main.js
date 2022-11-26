@@ -64,33 +64,39 @@ import { Dep, effectWatch, reactive } from "./core/index.js";
 // });
 
 // 测试二：常见的组件形式
-const App = {
-  // **template -> render**
-  render(context) {
-    effectWatch(() => {
-      // ui
-      document.querySelector("#app").textContent = ``;
-      const element = document.createElement("div");
-      const text = document.createTextNode("hello Yolo");
-      const text1 = document.createTextNode(context.obj.count);
-      element.append(text);
-      element.append(text1);
-      document.querySelector("#app").append(element);
-    });
-  },
-  setup() {
-    const obj = reactive({
-      count: 1,
-    });
-    window.obj = obj;
-    return {
-      obj,
-    };
-  },
-};
+// const App = {
+//   // **template -> render**
+//   render(context) {
+//     effectWatch(() => {
+//       // ui
+//       document.querySelector("#app").textContent = ``;
+//       const element = document.createElement("div");
+//       const text = document.createTextNode("hello Yolo");
+//       const text1 = document.createTextNode(context.obj.count);
+//       element.append(text);
+//       element.append(text1);
+//       document.querySelector("#app").append(element);
+//     });
+//   },
+//   setup() {
+//     const obj = reactive({
+//       count: 1,
+//     });
+//     window.obj = obj;
+//     return {
+//       obj,
+//     };
+//   },
+// };
 
-App.render(App.setup());
+// App.render(App.setup());
 
 // 暂存在缺点：
 // 1. dom是写死的，无法跨平台;
 // 2. 目前UI这套 是整体切换【document.querySelector("#app").textContent = ``; 再append】; 添加方式古板，花销大
+
+// mini-vue-4
+import { createApp } from "./core/index.js";
+import { App } from "./App.js";
+
+createApp(App).mount(document.querySelector("#app"));
