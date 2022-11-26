@@ -1,0 +1,24 @@
+{
+  "name": "mini-vue",
+  "version": "1.0.0",
+  "description": "source code train",
+  "main": "main.js",
+  "dependencies": {
+    "@vue/reactivity": "^3.2.45"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yolo-612/mini-vue.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yolo-612/mini-vue/issues"
+  },
+  "homepage": "https://github.com/yolo-612/mini-vue#readme"
+}
