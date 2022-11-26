@@ -19,3 +19,8 @@ source code train
 
 问题 2：get 收集依赖使用的 Dep 实例应该和 set 触发依赖 使用的实例是同一个实例 才对 ===》 如何取存储 Dep 实例
 即表现为 age ===》 Dep(A) | name ===> Dep(B) ===> 体现为有两层
+
+## mini-vue-3[响应式]
+
+视图上体现响应式【分别以组件的形式以及 webapi 的方法体现】
+其中：vue 的 template 会被渲染成 render 函数
