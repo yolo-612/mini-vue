@@ -17,7 +17,7 @@
 // // 触发的依赖
 // a.value = 20;
 
-import { Dep, effectWatch } from "./core/index.js";
+import { Dep, effectWatch, reactive } from "./core/index.js";
 
 const a = new Dep(10);
 let b = 0;
@@ -28,3 +28,17 @@ effectWatch(() => {
 });
 
 a.value = 20;
+
+// {} -> reactive
+// 诉求
+const user = reactive({
+  age: 10,
+});
+
+let nextAge = 0;
+effectWatch(() => {
+  nextAge = user.age + 1;
+  console.log(nextAge);
+});
+
+user.age++;
