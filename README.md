@@ -51,3 +51,5 @@ element.append(document.createTextNode("nihao"))
 后续需要将虚拟 dom 转化成真实的 dom 节点=== render.js[mountElement]
 
 ## diff 算法
+
+实现在 render.js 中，只要记住一个大概的过程就可以，实际的过程比这里的复杂

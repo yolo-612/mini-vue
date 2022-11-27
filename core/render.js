@@ -19,6 +19,10 @@ function createTextNode(text) {
   return document.createTextNode(text);
 }
 
+function remove(el, parent) {
+  parent.removeChild(el);
+}
+
 export function mountElement(vnode, container) {
   // tag
   const { tag, props, children } = vnode;
@@ -83,8 +87,66 @@ export function diff(n1, n2) {
         }
       }
     }
-  }
-  // 2. props
+    // 3. children
+    // new -> string array
+    // old -> string array
+    // 1 new string  | old string
+    // 2 new string  | old array
+    // 1 new array  | old string
+    // 1 new array  | old array
 
-  // 3. children
+    const newChildren = n2.children;
+    const oldChildren = n1.children;
+    if (typeof newChildren === "string") {
+      if (typeof oldChildren === "string") {
+        if (newChildren !== oldChildren) {
+          el.innerText = newChildren;
+        }
+      } else if (Array.isArray(oldChildren)) {
+        el.innerText = newChildren;
+      }
+    } else if (Array.isArray(newChildren)) {
+      if (typeof oldChildren === "string") {
+        el.innerText = "";
+        newChildren.forEach((v) => {
+          mountElement(v, el);
+        });
+      } else if (Array.isArray(oldChildren)) {
+        // TODO: 顺序没有 改变的情况下
+        // 1. 依次对比
+        // new ->  [a,b,c]
+        // old ->  [a,b,c]
+        // 2. new > old  add
+        // new ->  [a,b,c]
+        // old ->  [a,b]
+        // 3. new < old  remove
+        // new ->  [a,b]
+        // old ->  [a,b, c]
+
+        // 先找出公共长
+        const length = Math.min(newChildren.length, oldChildren.length);
+        // 依次对比
+        for (let i = 0; i < length; i++) {
+          const newVnode = newChildren[i];
+          const oldVnode = oldChildren[i];
+          diff(oldVnode, newVnode);
+        }
+        // 2. new > old  add
+        if (newChildren.length > length) {
+          for (let i = length; i < newChildren.length; i++) {
+            const vnode = newChildren[i];
+            mountElement(vnode, el);
+          }
+        }
+
+        // 3. new < old  remove
+        if (oldChildren.length > length) {
+          for (let i = length; i < oldChildren.length; i++) {
+            const vnode = oldChildren[i];
+            remove(vnode.el, el);
+          }
+        }
+      }
+    }
+  }
 }
