@@ -49,3 +49,5 @@ element.append(document.createTextNode("nihao"))
 element.append(document.createTextNode("nihao"))
 
 后续需要将虚拟 dom 转化成真实的 dom 节点=== render.js[mountElement]
+
+## diff 算法
