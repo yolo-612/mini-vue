@@ -31,3 +31,21 @@ vue3 实际使用中的是：
 初始化：createApp(App).mount("#app")
 将 effectWatch 提取到 render 的外层
 const element = rootComponent.render(setupResult)===> 只关心这个组件的视图
+
+## mini-vue-5
+
+优化点 1: 对比前后,只更新值变化的那一部分节点,不需要全局更新 diff
+
+虚拟 dom: 因为操作[get,set]dom 对于浏览器来说比较慢, 采用一个对象表示
+
+// div -> tag
+const element = document.createElement("div")
+
+// { id: test }
+element.setAttribute("id", "test")
+
+// children [string | []]
+element.append(document.createTextNode("nihao"))
+element.append(document.createTextNode("nihao"))
+
+后续需要将虚拟 dom 转化成真实的 dom 节点=== render.js[mountElement]
