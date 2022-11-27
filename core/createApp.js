@@ -1,4 +1,5 @@
 import { effectWatch } from "./reactivity.js";
+import { mountElement } from "./render.js";
 
 export function createApp(rootComponent) {
   // app
@@ -13,8 +14,10 @@ export function createApp(rootComponent) {
       effectWatch(() => {
         rootContainer.textContent = ``;
         // 这个就相当于是书写的一个vue组件[只关心这个组件的视图],后续挂在载#app下面
-        const element = rootComponent.render(setupResult);
-        rootContainer.append(element);
+        const subTree = rootComponent.render(setupResult);
+        console.log(subTree);
+        mountElement(subTree, rootContainer);
+        // rootContainer.append(element);
       });
     },
   };
